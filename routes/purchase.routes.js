@@ -1,14 +1,20 @@
-const controller = require('../controllers/purchase.controller.js');
+const controller = require("../controllers/purchase.controller.js");
 
 module.exports = {
-    get:[
-        {
-            route: "/operation/purchase",
-            requestFunction: controller.getAllPurchase
-        },
-        {
-            route: "/operation/purchase/:id",
-            requestFunction: controller.getPurchaseById
-        }
-    ],
-}
+  get: [
+    {
+      route: "/operation/purchase",
+      requestFunction: controller.getAllPurchase,
+    },
+    {
+      route: "/operation/purchase/:id",
+      requestFunction: controller.getPurchaseById,
+    },
+  ],
+  post:[
+    {
+      route:"/operation/purchase",
+      requestFunction: controller.postPurchase,
+    }
+  ]
+};
