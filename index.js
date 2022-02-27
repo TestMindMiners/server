@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('./cors.js');
+const verifyDb = require('./db/verifyDb.js');
 
 const app = express();
 const port = 3000;
+
+verifyDb();
 
 app.use(express.json());
 
