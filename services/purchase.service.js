@@ -26,19 +26,41 @@ const getPurchaseById = async (id) => {
   return result;
 };
 
+const getLastOperation = async () => {
+  let result;
+  try {
+    result = await dbOperations.findAll({
+      raw: true,
+      order: [ [ 'createdAt', 'DESC' ]]
+    });
+  } catch (error) {
+    result = error;
+  }
+
+  return result;
+};
+
 const postPurchase = async (operationBody) => {
-  const newOperation = new Operation(
+  const lastOperation = getLastOperation()
+    .catch((error) => {
+      return error;
+    })
+    .then((result) => {
+      return result;
+    });
+  const newPurchase = new Operation(
     new Date(),
     operationBody.operationType,
     operationBody.SHAREId
   );
-  newOperation.calculateMiddlePrice(
+  newPurchase.calculateMiddlePrice(
     operationBody.purchasePrice,
     operationBody.purchaseQuantity,
-    operationBody.brockerageFee
+    operationBody.brockerageFee,
+    lastOperation
   );
   try {
-    const result = await dbOperations.create(newOperation);
+    const result = await dbOperations.create(newPurchase);
     return result;
   } catch (error) {
     return error;

@@ -26,25 +26,46 @@ const getSaleById = async (id) => {
   return result;
 };
 
+const getLastOperation = async () => {
+  let result;
+  try {
+    result = await dbOperations.findOne({
+      raw: true,
+      order: [ [ 'createdAt', 'DESC' ]]
+    });
+  } catch (error) {
+    result = error;
+  }
+
+  return result;
+};
+
 const postSale = async (operationBody) => {
-  const newOperation = new Operation(
+  const lastOperation = getLastOperation()
+    .catch((error) => {
+      return error;
+    })
+    .then((result) => {
+      return result;
+    });
+  const newSale = new Operation(
     new Date(),
     operationBody.operationType,
     operationBody.SHAREId
   );
-  newOperation.calculateResultEarned(
+  newSale.calculateResultEarned(
     operationBody.salePrice,
     operationBody.saleQuantity,
-    operationBody.brockerageFee
+    operationBody.brockerageFee,
+    lastOperation
   );
   try {
-    const result = await dbOperations.create(newOperation);
-    return result;
+    response = await dbOperations.create(newSale);
+    return response;
   } catch (error) {
     return error;
   }
 };
-
 
 module.exports = {
   getAllSale,
