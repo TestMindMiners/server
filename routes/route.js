@@ -1,29 +1,18 @@
 const express = require("express");
-const purchaseRoutes = require("./purchase.routes.js");
-const saleRoutes = require("./sale.routes.js");
 const shareRoutes = require("./share.routes.js");
+const operationRoutes = require("./operation.routes.js");
 
 const router = express.Router();
 
 module.exports = router;
 
-// purchase operations end points
+// operations end points
 
-purchaseRoutes.get.forEach((route) => {
+operationRoutes.get.forEach((route) => {
   router.get(route.route, route.requestFunction);
 });
 
-purchaseRoutes.post.forEach((route) => {
-  router.post(route.route, route.requestFunction);
-});
-
-// sale operations end points
-
-saleRoutes.get.forEach((route) => {
-  router.get(route.route, route.requestFunction);
-});
-
-saleRoutes.post.forEach((route) => {
+operationRoutes.post.forEach((route) => {
   router.post(route.route, route.requestFunction);
 });
 
@@ -35,3 +24,5 @@ shareRoutes.get.forEach((route) => {
 shareRoutes.post.forEach((route) => {
   router.post(route.route, route.requestFunction);
 });
+
+
