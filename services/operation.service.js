@@ -16,15 +16,15 @@ const getAllOperations = async () => {
 };
 
 const getAllOperationsByShare = async (shareid) => {
-   try {
+  try {
     result = await dbOperations.findAll({
       where: {
-        "SHAREId": shareid,
-        operationType:"sale"
+        SHAREId: shareid,
+        operationType: "sale",
       },
       raw: true,
     });
-    return result
+    return result;
   } catch (error) {
     return error;
   }
@@ -50,11 +50,11 @@ const getOperationById = async (id) => {
   let result;
   try {
     result = await dbOperations.findOne({
-      where:{
-        id:id
+      where: {
+        id: id,
       },
       include: share,
-      raw:true
+      raw: true,
     });
   } catch (error) {
     result = error;
@@ -110,7 +110,7 @@ const postOperation = async (operationBody) => {
         });
       return response;
     });
-    return result;
+  return result;
 };
 
 module.exports = {

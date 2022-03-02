@@ -20,19 +20,17 @@ class Operation {
     this.SHAREId = SHAREId;
   }
   calculateIR() {
-    const minValue = Math.min(this.resultEarned,this.accumulatedLoss);
+    const minValue = Math.min(this.resultEarned, this.accumulatedLoss);
     const fullValue = this.resultEarned - minValue;
     const parcialValue = (fullValue * 15) / 100;
     this.irValue = fullValue * parcialValue;
     this.accumulatedLoss += minValue;
   }
   calculateMiddlePrice(lastValues) {
-    const initialMiddlePrice = lastValues===null
-    ? 0.0
-    : parseFloat(lastValues.middlePrice);
-    const initialMiddleQuantity = lastValues===null
-    ? 0.0
-    : parseFloat(lastValues.middleQuantity);
+    const initialMiddlePrice =
+      lastValues === null ? 0.0 : parseFloat(lastValues.middlePrice);
+    const initialMiddleQuantity =
+      lastValues === null ? 0.0 : parseFloat(lastValues.middleQuantity);
 
     this.middlePrice =
       (initialMiddlePrice * initialMiddleQuantity +
@@ -49,12 +47,10 @@ class Operation {
     }
   }
   calculateResultEarned(lastValues) {
-    const initialMiddlePrice = lastValues===null
-      ? 0.0
-      : parseFloat(lastValues.middlePrice);
-    const initialMiddleQuantity = lastValues===null
-      ? 0.0
-      : parseFloat(lastValues.middleQuantity);
+    const initialMiddlePrice =
+      lastValues === null ? 0.0 : parseFloat(lastValues.middlePrice);
+    const initialMiddleQuantity =
+      lastValues === null ? 0.0 : parseFloat(lastValues.middleQuantity);
     this.middlePrice = initialMiddlePrice;
     this.resultEarned =
       (this.operationPrice - initialMiddlePrice) * this.operationQuantity -

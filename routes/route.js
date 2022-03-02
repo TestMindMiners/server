@@ -24,5 +24,3 @@ shareRoutes.get.forEach((route) => {
 shareRoutes.post.forEach((route) => {
   router.post(route.route, route.requestFunction);
 });
-
-

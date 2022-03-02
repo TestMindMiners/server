@@ -11,7 +11,7 @@ const share = database.define("SHARE", {
   name: {
     type: sequelize.STRING,
     allowNull: false,
-  }
+  },
 });
 
 module.exports = share;

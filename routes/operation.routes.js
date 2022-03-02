@@ -7,22 +7,22 @@ module.exports = {
       requestFunction: controller.getAllOperations,
     },
     {
-        route: "/operation/share/:shareid",
-        requestFunction: controller.getAllOperationsByShare,
+      route: "/operation/share/:shareid",
+      requestFunction: controller.getAllOperationsByShare,
     },
     {
-        route: "/operation/type/:type",
-        requestFunction: controller.getAllOperationsByType,
+      route: "/operation/type/:type",
+      requestFunction: controller.getAllOperationsByType,
     },
     {
       route: "/operation/:id",
       requestFunction: controller.getOperationById,
     },
   ],
-  post:[
+  post: [
     {
-      route:"/operation",
+      route: "/operation",
       requestFunction: controller.postOperation,
-    }
-  ]
+    },
+  ],
 };

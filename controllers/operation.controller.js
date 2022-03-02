@@ -1,18 +1,18 @@
 const service = require("../services/operation.service.js");
 
 const getAllOperations = (req, res) => {
-    service
-      .getAllOperations()
-      .catch((error) => res.send(error))
-      .then((result) => res.send(result));
-  };
+  service
+    .getAllOperations()
+    .catch((error) => res.send(error))
+    .then((result) => res.send(result));
+};
 
-  const getAllOperationsByShare = (req, res) => {
-    service
-      .getAllOperationsByShare(req.params.shareid)
-      .catch((error) => res.send(error))
-      .then((result) => res.send(result));
-  };
+const getAllOperationsByShare = (req, res) => {
+  service
+    .getAllOperationsByShare(req.params.shareid)
+    .catch((error) => res.send(error))
+    .then((result) => res.send(result));
+};
 
 const getAllOperationsByType = (req, res) => {
   service
