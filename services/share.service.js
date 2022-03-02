@@ -4,7 +4,7 @@ const Share = require("../entitys/Share.js");
 const getAllShare = async () => {
   let result;
   try {
-    result = await dbShare.findAll({ raw: true });
+    result = await dbShare.findAll({ raw: true, });
   } catch (error) {
     result = error;
   }
@@ -14,7 +14,12 @@ const getAllShare = async () => {
 const getShareById = async (id) => {
   let result;
   try {
-    result = await dbShare.findByPk(id);
+    result = await dbShare.findOne({
+      where:{
+        id:id
+      },
+      raw:true
+    });
   } catch (error) {
     result = error;
   }
