@@ -88,7 +88,7 @@ const postOperation = async (operationBody) => {
     })
     .then(async (lastOperation) => {
       const newOperation = new Operation(
-        new Date(operationBody.operationDate),
+        operationBody.operationDate,
         operationBody.operationType,
         operationBody.SHAREId,
         operationBody.operationPrice,
