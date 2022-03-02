@@ -19,13 +19,19 @@ const operations = database.define("OPERATIONs", {
   resultEarned: {
     type: sequelize.FLOAT,
   },
+  operationPrice:{
+    type: sequelize.FLOAT,
+  },
+  operationQuantity:{
+    type: sequelize.FLOAT,
+  },
   middlePrice: {
     type: sequelize.FLOAT,
   },
   middleQuantity: {
     type: sequelize.FLOAT,
   },
-  iRValue: {
+  irValue: {
     type: sequelize.FLOAT,
     allowNull: true,
   },
@@ -33,6 +39,10 @@ const operations = database.define("OPERATIONs", {
     type: sequelize.FLOAT,
     allowNull: false,
   },
+  brockerageFee: {
+    type:sequelize.FLOAT,
+    allowNull:false
+  }
 });
 
 module.exports = operations;

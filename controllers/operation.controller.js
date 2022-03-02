@@ -7,6 +7,13 @@ const getAllOperations = (req, res) => {
       .then((result) => res.send(result));
   };
 
+  const getAllOperationsByShare = (req, res) => {
+    service
+      .getAllOperationsByShare(req.params.shareid)
+      .catch((error) => res.send(error))
+      .then((result) => res.send(result));
+  };
+
 const getAllOperationsByType = (req, res) => {
   service
     .getAllOperationsByType(req.params.type)
@@ -30,6 +37,7 @@ const postOperation = (req, res) => {
 
 module.exports = {
   getAllOperations,
+  getAllOperationsByShare,
   getAllOperationsByType,
   getOperationById,
   postOperation,

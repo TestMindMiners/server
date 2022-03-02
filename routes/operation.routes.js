@@ -7,6 +7,10 @@ module.exports = {
       requestFunction: controller.getAllOperations,
     },
     {
+        route: "/operation/share/:shareid",
+        requestFunction: controller.getAllOperationsByShare,
+    },
+    {
         route: "/operation/type/:type",
         requestFunction: controller.getAllOperationsByType,
     },
