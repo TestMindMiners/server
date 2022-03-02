@@ -1,82 +1,70 @@
 class Operation {
-  constructor(operationDate, operationType, SHAREId) {
+  constructor(
+    operationDate,
+    operationType,
+    SHAREId,
+    operationPrice,
+    operationQuantity,
+    brockerageFee
+  ) {
     this.operationDate = operationDate;
     this.operationType = operationType;
+    this.operationPrice = operationPrice;
+    this.operationQuantity = operationQuantity;
     this.middlePrice = 0.0;
     this.middleQuantity = 0.0;
     this.resultEarned = 0.0;
     this.accumulatedLoss = 0.0;
+    this.brockerageFee = brockerageFee;
     this.irValue = 0.0;
     this.SHAREId = SHAREId;
   }
-  getOperationDate() {
-    return this.operationDate;
-  }
-  getMiddlePrice() {
-    return this.middlePrice;
-  }
-  getMiddleQuantity() {
-    return this.middleQuantity;
-  }
-  getResultEarned() {
-    return this.resultEarned;
-  }
-  getSHAREId() {
-    return this.SHAREId;
-  }
-  getIrValue() {
-    return this.irValue;
-  }
   calculateIR() {
-    const minValue = 100;
+    const minValue = Math.min(this.resultEarned,this.accumulatedLoss);
     const fullValue = this.resultEarned - minValue;
     const parcialValue = (fullValue * 15) / 100;
     this.irValue = fullValue * parcialValue;
     this.accumulatedLoss += minValue;
   }
-  calculateMiddlePrice(
-    purchasePrice,
-    purchaseQuantity,
-    brockerageFee,
-    lastValues
-  ) {
-    const initialMiddlePrice = isNaN(lastValues.middlePrice)
-      ? 0.0
-      : parseFloat(lastValues.middlePrice);
-    console.log({ message: parseFloat(initialMiddlePrice) });
-    const initialMiddleQuantity = isNaN(lastValues.middleQuantity)
-      ? 0.0
-      : parseFloat(lastValues.middleQuantity);
+  calculateMiddlePrice(lastValues) {
+    const initialMiddlePrice = lastValues===null
+    ? 0.0
+    : parseFloat(lastValues.middlePrice);
+    const initialMiddleQuantity = lastValues===null
+    ? 0.0
+    : parseFloat(lastValues.middleQuantity);
 
     this.middlePrice =
       (initialMiddlePrice * initialMiddleQuantity +
-        purchasePrice * purchaseQuantity +
-        brockerageFee) /
-      (initialMiddleQuantity + purchaseQuantity);
-    this.calculateMiddleQuantity(purchaseQuantity, initialMiddleQuantity);
+        this.operationPrice * this.operationQuantity +
+        this.brockerageFee) /
+      (initialMiddleQuantity + this.operationQuantity);
+    this.calculateMiddleQuantity(initialMiddleQuantity);
   }
-  calculateMiddleQuantity(operationQuantity, initialMiddleQuantity) {
+  calculateMiddleQuantity(initialMiddleQuantity) {
     if (this.operationType === "purchase") {
-      this.middleQuantity = initialMiddleQuantity + operationQuantity;
+      this.middleQuantity = initialMiddleQuantity + this.operationQuantity;
     } else {
-      this.middleQuantity = initialMiddleQuantity - operationQuantity;
+      this.middleQuantity = initialMiddleQuantity - this.operationQuantity;
     }
   }
-  calculateResultEarned(salePrice, saleQuantity, brockerageFee, lastValues) {
-    const initialMiddlePrice = isNaN(lastValues.middlePrice)
+  calculateResultEarned(lastValues) {
+    const initialMiddlePrice = lastValues===null
       ? 0.0
       : parseFloat(lastValues.middlePrice);
-    const initialMiddleQuantity = isNaN(lastValues.middleQuantity)
+    const initialMiddleQuantity = lastValues===null
       ? 0.0
       : parseFloat(lastValues.middleQuantity);
+    this.middlePrice = initialMiddlePrice;
     this.resultEarned =
-      (salePrice - initialMiddlePrice) * saleQuantity - brockerageFee;
+      (this.operationPrice - initialMiddlePrice) * this.operationQuantity -
+      this.brockerageFee;
     if (this.resultEarned < 0) {
       this.addtoAccumulatedLoss(lastValues);
     } else {
       this.calculateIR();
     }
-    this.calculateMiddleQuantity(saleQuantity, initialMiddleQuantity);
+    this.calculateMiddleQuantity(initialMiddleQuantity);
   }
   addtoAccumulatedLoss(lastValues) {
     this.accumulatedLoss =
