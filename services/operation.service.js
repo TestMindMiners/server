@@ -1,6 +1,6 @@
 const dbOperations = require("../db/models/operations.model.js");
 const share = require("../db/models/share.model.js");
-const Operation = require("../entitys/Operation.js");
+const Operation = require("../entitys/operation.js");
 
 const getAllOperations = async () => {
   let result;
