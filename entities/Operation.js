@@ -19,13 +19,14 @@ class Operation {
     this.irValue = 0.0;
     this.SHAREId = SHAREId;
   }
+
   calculateIR() {
     const minValue = Math.min(this.resultEarned, this.accumulatedLoss);
     const fullValue = this.resultEarned - minValue;
-    const parcialValue = (fullValue * 15) / 100;
-    this.irValue = fullValue * parcialValue;
+    this.irValue = fullValue * 0.15;
     this.accumulatedLoss += minValue;
   }
+
   calculateMiddlePrice(lastValues) {
     const initialMiddlePrice =
       lastValues === null ? 0.0 : parseFloat(lastValues.middlePrice);
@@ -38,7 +39,9 @@ class Operation {
         this.brockerageFee) /
       (initialMiddleQuantity + this.operationQuantity);
     this.calculateMiddleQuantity(initialMiddleQuantity);
+    this.addtoAccumulatedLoss(lastValues);
   }
+
   calculateMiddleQuantity(initialMiddleQuantity) {
     if (this.operationType === "purchase") {
       this.middleQuantity = initialMiddleQuantity + this.operationQuantity;
@@ -46,6 +49,7 @@ class Operation {
       this.middleQuantity = initialMiddleQuantity - this.operationQuantity;
     }
   }
+
   calculateResultEarned(lastValues) {
     const initialMiddlePrice =
       lastValues === null ? 0.0 : parseFloat(lastValues.middlePrice);
@@ -55,17 +59,28 @@ class Operation {
     this.resultEarned =
       (this.operationPrice - initialMiddlePrice) * this.operationQuantity -
       this.brockerageFee;
-    if (this.resultEarned < 0) {
-      this.addtoAccumulatedLoss(lastValues);
-    } else {
+    
+    if (this.resultEarned > 0) {
+      this.accumulatedLoss = lastValues.accumulatedLoss;
       this.calculateIR();
+    }else{
+      this.addtoAccumulatedLoss(lastValues);
     }
     this.calculateMiddleQuantity(initialMiddleQuantity);
   }
+
   addtoAccumulatedLoss(lastValues) {
     this.accumulatedLoss =
       lastValues === null ? 0.0 : parseFloat(lastValues.accumulatedLoss);
     this.accumulatedLoss -= this.resultEarned;
+  }
+
+  listStartPosition (operations,id){
+    operations.forEach((operation,index) => {
+      if(operation.id===id){
+        return index;
+      }
+    });
   }
 }
 module.exports = Operation;
