@@ -6,8 +6,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 verifyDb();
-
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const route = require("./routes/route.js");
