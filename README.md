@@ -12,7 +12,7 @@ sequelize : 6.17.0
 sqlite3 : 5.0.2
 ````
 
-## To use this project you need:
+## To use this project, you need:
 
 ### Install node 16.14.0:
 
@@ -27,13 +27,13 @@ sqlite3 : 5.0.2
     git clone https://github.com/TestMindMiners/server.git
 ```
 
-### Open the terminal inside of this cloned folder and run:
+### Open the terminal inside this cloned folder and run:
 
 ```
     npm install
 ```
 
-### To run this project you can use:
+### To run this project, you can use:
 
 ```
     npm index.js
@@ -48,33 +48,33 @@ sqlite3 : 5.0.2
 ### controllers:
 
 ```
-    contains all controller methods to call the specific service.
+    Contains all controller methods to call the specific service.
 ```
 
 ### db:
 
 ```
-    contains:
-    - all models from entitys to sqlite database.
-    - all connection and db verification methods.
+    Contains:
+    - all models from entities to sqlite database.
+    - all connection and DB verification methods.
 ```
 
 ### entitys:
 
 ```
-    contains all entitys classes with attributes and methods.
+    Contains all entity classes with attributes and methods.
 ```
 
 ### routes:
 
 ```
-    contains all routes configurations for all end points.
+    Contains all routes configurations for all endpoints.
 ```
 
 ### services:
 
 ```
-    contains all CRUD methods and preparations (using entitys methods) for the CRUD execution.
+    Contains all CRUD methods and preparations (using entities methods) for the CRUD execution.
 ```
 
 ## Project links:

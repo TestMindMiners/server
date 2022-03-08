@@ -1,5 +1,5 @@
 const dbShare = require("../db/models/share.model.js");
-const Share = require("../entitys/Share.js");
+const Share = require("../entities/Share.js");
 
 const getAllShare = async () => {
   let result;
