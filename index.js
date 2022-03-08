@@ -3,11 +3,11 @@ var cors = require("cors");
 const verifyDb = require("./db/verifyDb.js");
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3000;
 
 verifyDb();
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://mindminerstestclient.herokuapp.com/",
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
