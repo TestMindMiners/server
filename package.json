@@ -24,7 +24,6 @@
     "har-validator": "^5.1.5",
     "node-gyp": "^8.4.1",
     "node-pre-gyp": "^0.17.0",
-    "nodemon": "^2.0.15",
     "request": "^2.88.2",
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
