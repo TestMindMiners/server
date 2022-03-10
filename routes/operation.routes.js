@@ -3,11 +3,11 @@ const controller = require("../controllers/operation.controller.js");
 module.exports = {
   get: [
     {
-      route: "/operation",
+      route: "/operation/all/:year",
       requestFunction: controller.getAllOperations,
     },
     {
-      route: "/operation/share/:shareid",
+      route: "/operation/share/:shareid/:year",
       requestFunction: controller.getAllOperationsByShare,
     },
     {
@@ -18,6 +18,10 @@ module.exports = {
       route: "/operation/:id",
       requestFunction: controller.getOperationById,
     },
+    {
+      route: "/operation/dates/years",
+      requestFunction: controller.getAllYears,
+    }
   ],
   post: [
     {

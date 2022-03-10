@@ -2,14 +2,14 @@ const service = require("../services/operation.service.js");
 
 const getAllOperations = (req, res) => {
   service
-    .getAllOperations()
+    .getAllOperations(req.params.year)
     .catch((error) => res.send(error))
     .then((result) => res.send(result));
 };
 
 const getAllOperationsByShare = (req, res) => {
   service
-    .getAllOperationsByShare(req.params.shareid)
+    .getAllOperationsByShare(req.params.shareid,req.params.year)
     .catch((error) => res.send(error))
     .then((result) => res.send(result));
 };
@@ -28,6 +28,13 @@ const getOperationById = (req, res) => {
     .then((result) => res.send(result));
 };
 
+const getAllYears = (req, res) => {
+  service
+    .getAllYears()
+    .catch((error) => res.send(error))
+    .then((result) => res.send(result));
+};
+
 const postOperation = (req, res) => {
   service
     .postOperation(req.body)
@@ -40,5 +47,6 @@ module.exports = {
   getAllOperationsByShare,
   getAllOperationsByType,
   getOperationById,
+  getAllYears,
   postOperation,
 };
